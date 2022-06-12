@@ -1,0 +1,38 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+
+{% load static %}
+  <div class="row justify-content-center my-3">
+    <div class="col-5">
+      <img src="{% static 'portfolio/foto.jpg' %}" width="350" class="img-fluid">
+    </div>
+  </div>
+  
+  <h2 class="mt-5">Portfolio</h2>
+  <hr>
+  <div class="row">
+  {% for project in projects %}
+  <div class="col-lg-4 col-md-6">
+
+    {% if project.url == "" %}
+    <a href="{% url 'generator:generator' %}">
+      <img src="{{ project.image.url }}" class="img-fluid mb-2" width="250" >
+    </a>
+    {% elif project.url == "https://todoo.info" %}
+    <a href="{% url 'todoo:currenttodoo' %}">
+      <img src="{{ project.image.url }}" class="img-fluid mb-2" width="250" >
+    </a>
+    {% else %}
+    <a href="{{ project.url }}" target="_blank">
+    <img src="{{ project.image.url }}" class="img-fluid mb-2" width="250">
+    </a>
+    {% endif %}
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+
+  </div>
+  {% endfor %}
+</div
+
+{% endblock %}
